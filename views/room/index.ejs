@@ -1,0 +1,24 @@
+<div class="col-md-12">
+  <div class="jumbotron">
+    <h2 class="">Rooms</h2>
+    <p>Create a new room or enter in a existing one</p>
+    <p><a class="btn btn-lg btn-success" href="/room/create" role="button">Create a new room.</a></p>
+  </div>
+</div>
+
+<!-- room list -->
+<div class="col-md-12">
+	<ul class="list-group">
+	<% for(var i=0; i<rooms.length; i++) {%>
+		<li class="list-group-item">
+			<div class="row">
+				<div class="col-md-2">
+					<div id="map<%= rooms[i].id %>" class="room-map-list" style="width: 160px; height: 80px"></div>
+				</div>
+				<div class="col-md-10">
+					<a href="/mood/?id=<%= rooms[i].uuid %>"><h2><%= rooms[i].roomname %></h2></a>
+				</div>
+		</li>
+	<% } %>
+	</ul>	
+</div>
