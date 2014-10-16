@@ -22,12 +22,21 @@ module.exports = {
    *    `/mood/index`
    *    `/mood`
    */
-   index: function (req, res) {
+  index: function (req, res) {
     res.view();
   },
 
   ok: function (req, res) {
     res.view();
+  },
+
+  list: function (req, res) {
+    Mood.findByAuthorId(/*TODO DEBUGreq.session.User.id*/ '1', {sort: 'createdAt DESC'}, function(err, moods) {
+        if (err) return res.json(err);
+        console.log(moods);
+
+        return res.view({'moods': moods});
+      });
   },
 
   /**
@@ -37,6 +46,7 @@ module.exports = {
    store: function (req, res) {
 
     var data = {
+      title: req.param('title'),
       body: req.param('body'),
       //authorId: req.session.User.id,
       authorId: 1, // TODO DEBUG
@@ -45,16 +55,15 @@ module.exports = {
       longitude: "-"
     }
 
+    console.log("1");
     Mood.create(data, function (err, mood) {
-      if (err) return res.send('An error occured', 500);
-
-      Mood.create(inputs, function (err, mood) {
-        if (err) return res.send('An error occured', 500);
-        callback(null, mood);
-        });
+      if (err) {
+        console.log(err);
+        return res.send('An error occured', 500);
+      }
+      console.log('data:' + data);
+      return res.view('mood/ok', {data: data});
     });
-
-    return res.redirect('/mood/ok');
   },
 
   subscribe: function(req, res) {

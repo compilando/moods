@@ -6,9 +6,16 @@
 				<legend>¿Cómo te encuentras?</legend>
 
 				<div class="form-group">
-				  <label class="col-md-4 control-label" for="body">Cuéntamelo...</label>  
+				  <label class="col-md-4 control-label" for="title">Cuéntamelo...</label>  
 				  <div class="col-md-4">
-					  <input id="body" name="body" type="text" placeholder="Cansado, alegre, deprimido..." class="form-control input-md">
+					  <input id="title" name="title" type="text" placeholder="Cansado, alegre, deprimido..." class="form-control input-md">
+				  </div>
+				</div>
+
+				<div class="form-group">
+				  <label class="col-md-4 control-label" for="body">¿Quieres contar algo mas?</label>
+				  <div class="col-md-4">                     
+				    <textarea class="form-control" id="body" name="body"></textarea>
 				  </div>
 				</div>
 
@@ -20,7 +27,17 @@
 				</div>
 
 		    	<input type="submit" class="btn btn-primary js-submit">
-		  	</form>                        
-        </div>
+	  	</form>                        
     </div>
 </div>
+
+<script>  
+  $( document ).ready(function() {
+      $(".pick-a-color").pickAColor({
+      	showAdvanced: false,
+      	showHexInput: false,
+      	allowBlank: false,
+      	inlineDropdown: false
+      });
+  });
+</script>

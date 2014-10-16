@@ -12,6 +12,12 @@ module.exports = {
 
   attributes: {
 
+    title: {
+      type: 'STRING',
+      required: true
+    },
+
+
     body: {
       type: 'STRING',
       required: true
