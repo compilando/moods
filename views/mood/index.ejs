@@ -1,43 +1,116 @@
 
-<div class="row">
-    <div class="col-md-12">
-        <form class="form-horizontal" method="POST" action="/mood/store"> 
-			<fieldset>
-				<legend>¿Cómo te encuentras?</legend>
+<script src="//cdnjs.cloudflare.com/ajax/libs/three.js/r69/three.js"></script>
 
-				<div class="form-group">
-				  <label class="col-md-4 control-label" for="title">Cuéntamelo...</label>  
-				  <div class="col-md-4">
-					  <input id="title" name="title" type="text" placeholder="Cansado, alegre, deprimido..." class="form-control input-md">
-				  </div>
-				</div>
+<div class="decoration"></div>
+<div class="one-half-responsive">
+    <div class="container no-bottom">
+    <h1>Please enter your current mood</h1>
+        <div class="contact-form no-bottom">
+            <form class="contactForm" method="POST" action="/mood/store" id="form">
+	        	<input type="hidden" id="mood1" name="mood1" value="" />
+	        	<input type="hidden" id="mood2" name="mood2" value="" />
+	        	<input type="hidden" id="mood3" name="mood3" value="" />
+	        	<input type="hidden" id="mood4" name="mood4" value="" />
+	        	<input type="hidden" id="mood5" name="mood5" value="" />
+	        	<input type="hidden" id="mood6" name="mood6" value="" />
+	        	<input type="hidden" id="mood7" name="mood7" value="" />
+	        	<input type="hidden" id="mood8" name="mood8" value="" />
+	        	<input type="hidden" id="mood9" name="mood9" value="" />
+	        	<input type="hidden" id="mood10" name="mood10" value="" />
+	        	<fieldset>
+                    <div class="formFieldWrap">
+                        <label class="field-title contactNameField" for="contactNameField">Tell me...<span>(required)</span></label>
+                        <input id="title" name="title" type="text" placeholder="Cansado, alegre, deprimido..." class="contactField requiredField">
+                    </div>
+                    <div class="formFieldWrap">
+                        <label class="field-title contactEmailField" for="contactEmailField">Anything else?...<span>(required)</span></label>
+                        <textarea class="contactField requiredField" id="body" name="body"></textarea>
+                    </div>
+                    <div class="detected-wrapper" style="text-align: center">
+                      <canvas id="gradient" width="300" height="300" style="background-color: #ffffff"></canvas>
+                    </div>
+                    <div class="formFieldWrap">
+                        <label class="field-title contactEmailField" for="contactEmailField">Choose your mood<span>(required)</span></label>
+                        <input type="text" value="" name="mood" class="contactField pick-a-color requiredField">
+                    </div>
 
-				<div class="form-group">
-				  <label class="col-md-4 control-label" for="body">¿Quieres contar algo mas?</label>
-				  <div class="col-md-4">                     
-				    <textarea class="form-control" id="body" name="body"></textarea>
-				  </div>
-				</div>
-
-				<div class="form-group">
-				  <label class="col-md-4 control-label" for="mood">Dale un color...</label>  
-				  <div class="col-md-4">
-					  <input type="text" value="" name="mood" class="pick-a-color form-control">
-				  </div>
-				</div>
-
-		    	<input type="submit" class="btn btn-primary js-submit">
-	  	</form>                        
+                    <div class="formSubmitButtonErrorsWrap">
+                        <input type="submit" class="buttonWrap button button-green submitButton" value="ENTER" />
+                    </div>
+                </fieldset>
+            </form>
+        </div>
     </div>
 </div>
 
-<script>  
-  $( document ).ready(function() {
-      $(".pick-a-color").pickAColor({
+<div class="decoration"></div>
+
+<script>
+
+  document.moods = {};
+  jQuery(document).ready(function () {
+      jQuery(".pick-a-color").pickAColor({
       	showAdvanced: false,
       	showHexInput: false,
       	allowBlank: false,
       	inlineDropdown: false
       });
+
+  jQuery("#form").submit(function( event ) {
+    jQuery("#mood1").val(document.moods["General"]);
+    jQuery("#mood2").val(document.moods["Enfado"]);
+    jQuery("#mood3").val(document.moods["Esplendor"]);
+    jQuery("#mood4").val(document.moods["Envidia"]);
+    jQuery("#mood5").val(document.moods["Esperanza"]);
+    jQuery("#mood6").val(document.moods["Tristeza"]);
+    jQuery("#mood7").val(document.moods["Amor"]);
+    jQuery("#mood8").val(document.moods["Pesimismo"]);
+	});
   });
+
+    var camera, scene, material, mesh, geometry, renderer
+
+    function drawSphere() {
+        init();
+        animate();
+    }
+
+    function init() {
+        // camera
+        scene = new THREE.Scene()
+        camera = new THREE.PerspectiveCamera(25, .9, 1, 500);
+        camera.position.z = 450;
+        scene.add(camera);
+
+        // sphere object
+        var radius = 50,
+            segments = 50,
+            rings = 50;
+        geometry = new THREE.SphereGeometry(radius, segments, rings);
+        material = new THREE.MeshNormalMaterial({color:0x002288});
+        mesh = new THREE.Mesh(geometry, material);
+        //scene
+        ;
+        scene.add(mesh);
+        // renderer
+        renderer = new THREE.WebGLRenderer( { canvas: gradient });
+        renderer.setClearColorHex( 0xffffff, 1 );
+        renderer.setSize(200, 200);
+
+    }
+
+
+    function animate() {
+        requestAnimationFrame(animate);
+        render();
+    }
+
+    function render() {
+        mesh.rotation.x += .001;
+        mesh.rotation.y += .002;
+        renderer.render(scene, camera);
+    }
+    // fn callin
+    drawSphere();
+
 </script>
