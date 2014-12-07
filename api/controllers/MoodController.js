@@ -14,7 +14,6 @@
  *
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
-var moment = require('moment');
 
 module.exports = {
 
@@ -36,7 +35,7 @@ module.exports = {
         if (err) return res.json(err);
         console.log(moods);
 
-        return res.view({'moods': moods, moment: moment});
+        return res.view({'moods': moods});
       });
   },
 
