@@ -1,43 +1,255 @@
+<script src="http://threejs.org/build/three.min.js"></script>
+<script src="http://mrdoob.github.io/three.js/examples/fonts/helvetiker_regular.typeface.js"></script>
 
-<div class="row">
-    <div class="col-md-12">
-        <form class="form-horizontal" method="POST" action="/mood/store"> 
-			<fieldset>
-				<legend>¿Cómo te encuentras?</legend>
+<div class="decoration"></div>
+<div class="one-half-responsive">
+    <div class="container no-bottom">
+    <h1>Please enter your current mood</h1>
+        <div class="contact-form no-bottom">
+            <form class="contactForm" method="POST" action="/mood/store" id="form">
+	        	<input type="hidden" id="mood1" name="mood1" value="" />
+	        	<input type="hidden" id="mood2" name="mood2" value="" />
+	        	<input type="hidden" id="mood3" name="mood3" value="" />
+	        	<input type="hidden" id="mood4" name="mood4" value="" />
+	        	<input type="hidden" id="mood5" name="mood5" value="" />
+	        	<input type="hidden" id="mood6" name="mood6" value="" />
+	        	<input type="hidden" id="mood7" name="mood7" value="" />
+	        	<input type="hidden" id="mood8" name="mood8" value="" />
+	        	<input type="hidden" id="mood9" name="mood9" value="" />
+	        	<input type="hidden" id="mood10" name="mood10" value="" />
+	        	<fieldset>
+                    <div class="formFieldWrap">
+                        <label class="field-title contactNameField" for="contactNameField">Tell me...<span>(required)</span></label>
+                        <input id="title" name="title" type="text" placeholder="Cansado, alegre, deprimido..." class="contactField requiredField">
+                    </div>
+                    <div class="formFieldWrap">
+                        <label class="field-title contactEmailField" for="contactEmailField">Anything else?...<span>(required)</span></label>
+                        <textarea class="contactField requiredField" id="body" name="body"></textarea>
+                    </div>
+                    <div class="detected-wrapper" style="text-align: center">
+                      <div id="container" width="250" height="250" style="background-color: #ffffff"></div>
+                    </div>
+                    <div class="formFieldWrap">
+                        <label class="field-title contactEmailField" for="contactEmailField">Choose your mood<span>(required)</span></label>
+                        <div class="sliderParent">
+                          <div class="sliderTitle">Happy</div>
+                          <div id="slider1" class="slider"></div>
+                        </div>
+                        <div class="sliderParent">
+                          <div class="sliderTitle">Excited</div>
+                          <div id="slider2" class="slider"></div>
+                        </div>
+                        <div class="sliderParent">
+                          <div class="sliderTitle">Angry</div>
+                          <div id="slider3" class="slider"></div>
+                        </div>
+                        <div class="sliderParent">
+                          <div class="sliderTitle">Tired</div>
+                          <div id="slider4" class="slider"></div>
+                        </div>
+                        <div class="sliderParent">
+                          <div class="sliderTitle">Nervous</div>
+                          <div id="slider5" class="slider"></div>
+                        </div>
+                        <div class="sliderParent">
+                          <div class="sliderTitle">Sad</div>
+                          <div id="slider6" class="slider"></div>
+                        </div>
+                    </div>
 
-				<div class="form-group">
-				  <label class="col-md-4 control-label" for="title">Cuéntamelo...</label>  
-				  <div class="col-md-4">
-					  <input id="title" name="title" type="text" placeholder="Cansado, alegre, deprimido..." class="form-control input-md">
-				  </div>
-				</div>
-
-				<div class="form-group">
-				  <label class="col-md-4 control-label" for="body">¿Quieres contar algo mas?</label>
-				  <div class="col-md-4">                     
-				    <textarea class="form-control" id="body" name="body"></textarea>
-				  </div>
-				</div>
-
-				<div class="form-group">
-				  <label class="col-md-4 control-label" for="mood">Dale un color...</label>  
-				  <div class="col-md-4">
-					  <input type="text" value="" name="mood" class="pick-a-color form-control">
-				  </div>
-				</div>
-
-		    	<input type="submit" class="btn btn-primary js-submit">
-	  	</form>                        
+                    <div class="formSubmitButtonErrorsWrap">
+                        <input type="submit" class="buttonWrap button button-green submitButton" value="ENTER" />
+                    </div>
+                </fieldset>
+            </form>
+        </div>
     </div>
 </div>
 
-<script>  
-  $( document ).ready(function() {
-      $(".pick-a-color").pickAColor({
-      	showAdvanced: false,
-      	showHexInput: false,
-      	allowBlank: false,
-      	inlineDropdown: false
-      });
+<div class="decoration"></div>
+
+<script>
+
+  document.moods = {};
+  jQuery(document).ready(function () {
+      var halfRightCircularSlider1 = jQuery('#slider1').CircularSlider({
+      min : 0, max: 10, value : 0, radius: 30, labelSuffix: "",
+      slide : function(ui, value) {
+        var alpha = value / 100;
+
+      }});
+
+      var halfRightCircularSlider2 = jQuery('#slider2').CircularSlider({
+      min : 0, max: 10, value : 0, radius: 30, labelSuffix: "",
+      slide : function(ui, value) {
+        var alpha = value / 100;
+      }});
+
+      var halfRightCircularSlider3 = jQuery('#slider3').CircularSlider({
+      min : 0, max: 10, value : 0, radius: 30, labelSuffix: "",
+      slide : function(ui, value) {
+        var alpha = value / 100;
+      }});
+
+      var halfRightCircularSlider4 = jQuery('#slider4').CircularSlider({
+      min : 0, max: 10, value : 0, radius: 30, labelSuffix: "",
+      slide : function(ui, value) {
+        var alpha = value / 100;
+      }});
+
+      var halfRightCircularSlider5 = jQuery('#slider5').CircularSlider({
+      min : 0, max: 10, value : 0, radius: 30, labelSuffix: "",
+      slide : function(ui, value) {
+        var alpha = value / 100;
+      }});
+
+      var halfRightCircularSlider6 = jQuery('#slider6').CircularSlider({
+      min : 0, max: 10, value : 0, radius: 30, labelSuffix: "",
+      slide : function(ui, value) {
+        var alpha = value / 100;
+      }});
+
+
+    jQuery("#form").submit(function( event ) {
+      jQuery("#mood1").val(document.moods["General"]);
+      jQuery("#mood2").val(document.moods["Enfado"]);
+      jQuery("#mood3").val(document.moods["Esplendor"]);
+      jQuery("#mood4").val(document.moods["Envidia"]);
+      jQuery("#mood5").val(document.moods["Esperanza"]);
+      jQuery("#mood6").val(document.moods["Tristeza"]);
+      jQuery("#mood7").val(document.moods["Amor"]);
+      jQuery("#mood8").val(document.moods["Pesimismo"]);
+  	});
   });
+
+    // frame counter
+    var count = 0
+
+    // mouse
+    var mouse = {X:0,Y:0}
+
+    // event handlers
+    document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+    document.addEventListener( 'mousewheel', onMouseWheel, false );
+    document.addEventListener( 'keypress', onKeyPress, false);
+
+    // drawing board: entire window
+    var container = jQuery('#container'), renderer = new THREE.WebGLRenderer()
+    var canvas = {width:200,height:200}
+    canvas.halfX=canvas.width/2
+    canvas.halfY=canvas.height/2
+    renderer.setSize(canvas.width,canvas.height)
+    renderer.setClearColorHex( 0xffffff, 1 );
+
+    // camera: viewing angle, aspect, near, far
+    var camera = new THREE.PerspectiveCamera(55,canvas.width/canvas.height,0.1,10000)
+
+    // pull back camera
+    camera.position.z = 250
+
+    // scene
+    var scene = new THREE.Scene()
+    scene.add(camera)
+    container.append(renderer.domElement)
+
+    // game objects
+    var obj = []
+
+    // sphere object: radius, segments, rings, and material
+    obj['sphere'] = new THREE.Mesh(
+        new THREE.SphereGeometry(100,300,30),
+        new THREE.MeshLambertMaterial({color:0xCC0000})
+    );
+
+    // add the sphere to the scene
+    scene.add(obj['sphere'])
+
+    // point light
+    var light = []
+    light['pointLight'] = new THREE.PointLight(0xFFFFFF)
+    // point light position
+    light['pointLight'].position.x = 10
+    light['pointLight'].position.y = 50
+    light['pointLight'].position.z = 130
+    // add to scene
+    scene.add(light['pointLight'])
+
+    // variable to toggle glow affect
+    var up = true;
+
+    // text to find light source, hidden
+    obj['lightText'] = new THREE.Mesh(
+        new THREE.TextGeometry( 'LIGHT', {
+            size:2,height:2,curveSegments:4,
+            font:"helvetiker",
+        }),
+        new THREE.MeshBasicMaterial({color: 0x11ff00}));
+    obj['lightText'].position.x = light['pointLight'].position.x
+    obj['lightText'].position.y = light['pointLight'].position.y
+    obj['lightText'].position.z = light['pointLight'].position.z
+    obj['lightText'].visible = false
+    scene.add(obj['lightText']);
+
+// event: keypress
+function onKeyPress(event) {
+    // press D, debug
+    if(event.charCode == 'D'.charCodeAt(0) || event.charCode == 'd'.charCodeAt(0)) {
+        obj['lightText'].visible = !obj['lightText'].visible
+    }
+}
+
+// event: mouse movement
+function onDocumentMouseMove(event) {
+    mouse.X = ( event.clientX - canvas.halfX );
+    mouse.Y = ( event.clientY - canvas.halfY );
+}
+
+// event: mouse wheel
+function onMouseWheel(event) {
+
+    // zoom out
+    if(event.wheelDelta>0)
+        camera.position.z += 20
+    // zoom out, but not through object
+    else
+        if(camera.position.z >100)
+            camera.position.z -= 20
+}
+
+
+// draw loop
+function draw() {
+
+    // brightening the sphere
+    if(up) {
+        obj['sphere'].material.color.r = obj['sphere'].material.color.r + 0.005
+        if(obj['sphere'].material.color.r >= 0.99) {
+            up = false
+        }
+    }
+    // darkening the sphere
+    else {
+        obj['sphere'].material.color.r = obj['sphere'].material.color.r - 0.005
+        if(obj['sphere'].material.color.r <= 0.2) {
+            up = true
+        }
+    }
+
+    camera.position.x += ( mouse.X - camera.position.x ) * .05;
+    camera.position.y += ( - mouse.Y - camera.position.y ) * .05;
+
+    camera.lookAt(scene.position)
+
+    // draw!
+    renderer.render(scene,camera);
+
+}
+
+// browser drawing magic
+animate();
+function animate() {
+    requestAnimationFrame( animate );
+    draw();
+}
+
 </script>

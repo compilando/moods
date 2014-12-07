@@ -29,69 +29,117 @@
     -->
 
     <!--STYLES-->
+    <link rel="stylesheet" href="/linker/styles/animate.css">
     <link rel="stylesheet" href="/linker/styles/bootstrap-social.css">
-    <link rel="stylesheet" href="/linker/styles/bootstrap.min.css">
+    <link rel="stylesheet" href="/linker/styles/circular-slider.min.css">
     <link rel="stylesheet" href="/linker/styles/font-awesome.css">
-    <link rel="stylesheet" href="/linker/styles/pick-a-color-1.2.3.min.css">
-    <link rel="stylesheet" href="/linker/styles/styles.css">
+    <link rel="stylesheet" href="/linker/styles/framework.css">
+    <link rel="stylesheet" href="/linker/styles/menu.css">
+    <link rel="stylesheet" href="/linker/styles/owl.theme.css">
+    <link rel="stylesheet" href="/linker/styles/style.css">
+    <link rel="stylesheet" href="/linker/styles/swipebox.css">
     <!--STYLES END-->
 
 
-    <!--SCRIPTS-->
-    <script src="/linker/js/jquery.min.js"></script>
-    <script src="/linker/js/underscore.min.js"></script>
-    <script src="/linker/js/bootstrap.min.js"></script>
-    <script src="/linker/js/pick-a-color.js"></script>
-    <script src="/linker/js/tinycolor-0.9.15.min.js"></script>
-    <!--SCRIPTS END-->
-    
+    <!--aSCRIPTS-->
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.min.js"></script>
+
+    <script src="/linker/scripts/custom.js"></script>
+    <script src="/linker/scripts/framework.plugins.js"></script>
+    <script src="/linker/scripts/circular-slider.min.js"></script>
+    <script src="/linker/scripts/tinycolor-0.9.15.min.js"></script>
+    <!--aSCRIPTS END-->
+
   </head>
 
   <body>
+	<div id="preloader">
+	<div id="status">
+		<p class="center-text">
+			Loading the content...
+	        <em>Loading depends on your connection speed!</em>
+	    </p>
+	</div>
+	</div>
 
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/">Home</a>
-        </div>
-        <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
+
+<div class="all-elements">
+<div id="perspective" class="perspective effect-airbnb"><!--this houses the entire page, and creates the effect-->
+    <div class="header">
+        <a href="#" id="showMenu"><i class="fa fa-navicon"></i></a>
+        <a href="#" id="pageLogo"><img src="/linker/images/logo.png" alt="img"></a>
+        <a href="#" id="openMail"><i class="fa fa-envelope-o"></i></a>
+    </div>
+    <div class="outer-nav">
+        <div class="inner-nav">
+            <div class="nav-item">
+                <a href="/" class="active-item">
+                    <i class="nav-icon fa fa-home"></i>
+                    Home
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="#" class="deploy-nav-sub-item">
+                    <i class="nav-icon fa fa-cog"></i>
+                    Moods
+                </a>
+                <div class="nav-sub-item">
+                    <a href="/mood/index">Current Mood</a>
+                    <a href="/mood/list">History</a>
+                </div>
+            </div>
 
             <% if (session.authenticated) { %>
-              <li><a href="/mood/list">Moods</a></li>
-            <% } %>
-
-            <% if (session.authenticated) { %>
-              <li><a href="/session/destroy">Logout</a></li>
+            <div class="nav-item">
+                <a id="closeMenu" href="/session/destroy">
+                    <i class="nav-icon fa fa-times"></i>
+                    Close
+                </a>
+            </div>
             <% } else { %>
-              <li><a href="/session/create">Login</a></li>
-              <li><a href="/user/create">Register</a></li>
+            <div class="nav-item">
+                <a id="closeMenu" href="/session/create">
+                    <i class="nav-icon fa fa-times"></i>
+                    Login
+                </a>
+            </div>
+            <div class="nav-item">
+                <a id="closeMenu" href="/user/create">
+                    <i class="nav-icon fa fa-times"></i>
+                    Register
+                </a>
+            </div>
             <% } %>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
+        </div>
     </div>
 
-    <div class="container">
+    <div class="perspective_container"><!--the "moving to the left" content box-->
+        <div class="wrapper"><!-- wrapper needed for scroll -->
+			<div class="content">
 
-      <% if(flash && flash.err) { %>
-        <ul class="alert alert-danger alert-dismissable">
-          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-          <% Object.keys(flash.err).forEach(function(error) { %>
-            <li><%- flash.err[error] %></li>
-          <% }) %>
-        </ul>
-      <% } %>
+	    		<%- body %>
 
-      <%- body %>
+			    <div class="footer-section">
+			        <p class="footer-text">
+			            Copyright 2014.<br>
+			            All rights reserved.
+			        </p>
+			        <div class="footer-icons">
+			            <a href="#" class="footer-facebook-icon"><i class="fa fa-facebook"></i></a>
+			            <a href="#" class="footer-google-icon"><i class="fa fa-google-plus"></i></a>
+			            <a href="#" class="footer-twitter-icon"><i class="fa fa-twitter"></i></a>
+			            <a href="#" class="footer-up-icon"><i class="fa fa-angle-up"></i></a>
+			        </div>
+			    </div>
+		    </div>
 
-    </div><!-- /.container -->
+        </div><!-- wrapper -->
+    </div><!-- /perspective container -->
+</div><!-- /perspective -->
+
+    </div>
+
 
     <!--
         Client-side Templates
@@ -114,11 +162,11 @@
               before they're served.
     -->
 
+    <script src="/linker/scripts/menu.js"></script>
+
     <!--TEMPLATES-->
     
     <!--TEMPLATES END-->
-
-
 
   </body>
 </html>
